@@ -10,29 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Clonar el repositorio
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      # 2️⃣ Desplegar vía SSH
       - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          # Optional: store your SSH port in a secret (recommended)
-          port: ${{ secrets.VPS_SSH_PORT }}
-          # Optional: if your private key is encrypted, add the passphrase as a secret
-          passphrase: ${{ secrets.VPS_SSH_PASSPHRASE }}
+          host: ${{ secrets.VPS_HOST }}       # IP o hostname del VPS, ej: 147.189.168.46
+          username: ${{ secrets.VPS_USER }}   # Usuario SSH, ej: root
+          key: ${{ secrets.VPS_SSH_KEY }}     # Clave privada completa
+          port: ${{ secrets.VPS_SSH_PORT }}   # Puerto SSH, ej: 22
+          passphrase: ${{ secrets.VPS_SSH_PASSPHRASE }} # Si tu clave no tiene passphrase, omite esta línea
+          timeout: 30s
+          command_timeout: 10m
           script: |
             set -e
-            # adjust this path to where your repo is on the VPS
+            # Ajusta la ruta a donde está tu repositorio en el VPS
             cd /root/API-Vet
             git pull origin main
-            # If you use docker-compose to run the app, rebuild and restart
+
+            # Si usas docker-compose, reconstruir y levantar el contenedor
             if command -v docker-compose >/dev/null 2>&1; then
               docker-compose pull || true
               docker-compose up -d --build
             else
-              # fallback: run a git-based deploy (adjust to your service)
-              echo "docker-compose not found on remote. Update script to suit your deploy method."
+              echo "docker-compose no encontrado. Ajusta tu script según tu deploy."
             fi
