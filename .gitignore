@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.env
+.env.*
+
+# Byte-compiled / optimized / DLL files
+*.so
+
+# VSCode
+.vscode/
+
+# Docker
+*.log
+
+# Mac
+.DS_Store
+
+# Pytest cache
+.pytest_cache/
+
+# Database files
+*.db
+
+# Node modules (if any)
+node_modules/
