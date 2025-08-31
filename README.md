@@ -99,3 +99,20 @@ docker-compose logs -f db
 
 ---
 Pequeña guía creada automáticamente. Si quieres que añada el `/healthz` y los tests ahora, te lo implemento.
+
+## CI / Deployment (GitHub Actions -> VPS)
+
+Este repositorio incluye una workflow `.github/workflows/deploy.yml` que intentará desplegar en tu VPS
+cuando hagas push a `main`. Para que funcione, añade los siguientes secretos en GitHub (Settings → Secrets → Actions):
+
+- `VPS_HOST` — dirección IP o hostname del VPS.
+- `VPS_USER` — usuario SSH (por ejemplo `root`).
+- `VPS_SSH_KEY` — clave privada SSH (PEM), multi-line secret.
+- `VPS_SSH_PORT` — puerto SSH del VPS (opcional, por defecto 22).
+- `VPS_SSH_PASSPHRASE` — passphrase de la clave privada (opcional).
+
+Notas:
+- Asegúrate de que la clave pública correspondiente esté en `~/.ssh/authorized_keys` del VPS.
+- Ajusta la ruta `cd /root/API-Vet` en `deploy.yml` al path real donde está el repo en el VPS.
+- El workflow ejecuta `git pull origin main` y `docker-compose up -d --build` en el VPS; modifica el script si tu deploy es distinto.
+

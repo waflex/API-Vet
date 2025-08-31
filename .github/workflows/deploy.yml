@@ -19,7 +19,10 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          port: 44022
+          # Optional: store your SSH port in a secret (recommended)
+          port: ${{ secrets.VPS_SSH_PORT }}
+          # Optional: if your private key is encrypted, add the passphrase as a secret
+          passphrase: ${{ secrets.VPS_SSH_PASSPHRASE }}
           script: |
             set -e
             # adjust this path to where your repo is on the VPS
