@@ -10,11 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Clonar el repositorio
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      # 2️⃣ Desplegar vía SSH
       - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
