@@ -9,8 +9,7 @@ import os
 
 # Get DATABASE_URL from environment variable with fallback for local development
 DATABASE_URL = os.getenv(
-    "DATABASE_URL", 
-    "postgresql://alumno:alumno123@localhost/veterinaria"
+    "DATABASE_URL","postgresql://alumno:alumno123@localhost:3322/veterinaria"
 )
 
 database = databases.Database(DATABASE_URL)
