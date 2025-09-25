@@ -120,3 +120,44 @@ async def obtener_mascota(mascota_id: int):
     if mascota is None:
         raise HTTPException(status_code=404, detail="Mascota no encontrada")
     return mascota
+
+# Replace entire resource
+@app.put("/mascotas/{mascota_id}", response_model=Mascota)
+async def reemplazar_mascota(mascota_id: int, mascota: Mascota):
+    # Ensure the resource exists
+    existing = await database.fetch_one(mascotas.select().where(mascotas.c.id == mascota_id))
+    if existing is None:
+        raise HTTPException(status_code=404, detail="Mascota no encontrada")
+
+    # Prevent changing the id
+    update_values = {
+        "nombre": mascota.nombre,
+        "especie": mascota.especie,
+        "edad": mascota.edad,
+    }
+
+    await database.execute(mascotas.update().where(mascotas.c.id == mascota_id).values(**update_values))
+
+    updated = await database.fetch_one(mascotas.select().where(mascotas.c.id == mascota_id))
+    return updated
+
+# Partial update
+class MascotaPatch(BaseModel):
+    nombre: str | None = None
+    especie: str | None = None
+    edad: int | None = None
+
+@app.patch("/mascotas/{mascota_id}", response_model=Mascota)
+async def modificar_mascota(mascota_id: int, patch: MascotaPatch):
+    existing = await database.fetch_one(mascotas.select().where(mascotas.c.id == mascota_id))
+    if existing is None:
+        raise HTTPException(status_code=404, detail="Mascota no encontrada")
+
+    changes = patch.dict(exclude_unset=True)
+    if not changes:
+        raise HTTPException(status_code=400, detail="No se proporcionaron campos para actualizar")
+
+    await database.execute(mascotas.update().where(mascotas.c.id == mascota_id).values(**changes))
+
+    updated = await database.fetch_one(mascotas.select().where(mascotas.c.id == mascota_id))
+    return updated

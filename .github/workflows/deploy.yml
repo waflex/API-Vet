@@ -16,21 +16,21 @@ jobs:
       - name: Deploy to VPS via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.VPS_HOST }}       # IP o hostname del VPS, ej: 147.189.168.46
-          username: ${{ secrets.VPS_USER }}   # Usuario SSH, ej: root
-          key: ${{ secrets.VPS_SSH_KEY }}     # Clave privada completa
-          port: ${{ secrets.VPS_SSH_PORT }}   # Puerto SSH, ej: 22
-          passphrase: ${{ secrets.VPS_SSH_PASSPHRASE }} # Si tu clave no tiene passphrase, omite esta línea          timeout: 30s
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT }}
+          passphrase: ${{ secrets.VPS_SSH_PASSPHRASE }}
           script: |
             set -e
-            # Ajusta la ruta a donde está tu repositorio en el VPS
             cd /root/API-Vet
             git pull origin main
 
-            # Si usas docker-compose, reconstruir y levantar el contenedor
-            if command -v docker-compose >/dev/null 2>&1; then
-              docker-compose pull || true
-              docker-compose up -d --build
+            # Prefer Docker Compose v2 (docker compose). If not available, fall back to docker-compose.
+            if docker compose version >/dev/null 2>&1; then
+              docker compose down --remove-orphans || true
+              docker compose up -d --build --remove-orphans
             else
-              echo "docker-compose no encontrado. Ajusta tu script según tu deploy."
+              docker-compose down --remove-orphans || true
+              docker-compose up -d --build --remove-orphans
             fi
