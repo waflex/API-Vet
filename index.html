@@ -274,7 +274,7 @@ print(resp.json())</code></pre>
 
 	<script>
 		// use the current origin so the interactive page works when served by the API
-		const base = window.location.origin;
+		const base = window.location.origin+'/api';
 		const result = document.getElementById('result');
 		function show(x) { result.textContent = JSON.stringify(x, null, 2); }
 
