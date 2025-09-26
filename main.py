@@ -161,3 +161,11 @@ async def modificar_mascota(mascota_id: int, patch: MascotaPatch):
 
     updated = await database.fetch_one(mascotas.select().where(mascotas.c.id == mascota_id))
     return updated
+@app.delete("/mascotas/{mascota_id}", status_code=204)
+async def eliminar_mascota(mascota_id: int):
+    existing = await database.fetch_one(mascotas.select().where(mascotas.c.id == mascota_id))
+    if existing is None:
+        raise HTTPException(status_code=404, detail="Mascota no encontrada")
+
+    await database.execute(mascotas.delete().where(mascotas.c.id == mascota_id))
+    return

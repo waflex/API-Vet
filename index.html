@@ -1,34 +1,145 @@
 <!doctype html>
 <html lang="es">
+
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<title>API Veterinaria — Documentación</title>
 	<style>
-		:root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#6ee7b7;--accent2:#60a5fa}
-		html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial;background:linear-gradient(180deg,#071025 0%, #061227 100%);color:#e6eef6}
-		.container{max-width:980px;margin:32px auto;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,.6)}
-		h1{margin:0 0 6px;font-size:28px}
-		p.lead{color:var(--muted);margin-top:0}
-		.grid{display:grid;grid-template-columns:1fr 340px;gap:20px;margin-top:20px}
-		.card{background:var(--card);padding:18px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
-		pre{background:#071427;padding:12px;border-radius:8px;overflow:auto;color:#d6f4ea}
-		code{font-family:Consolas,monaco,monospace}
-		.endpoint{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-		.method{font-weight:700;padding:6px 10px;border-radius:6px;background:rgba(255,255,255,0.04)}
-		.method.get{color:var(--accent2)}.method.post{color:var(--accent)}
-		.try{margin-top:12px}
-		.btn{display:inline-block;padding:8px 12px;border-radius:8px;background:linear-gradient(90deg,#1f2937,#0f1724);color:#e6eef6;text-decoration:none;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
-		label{display:block;margin:8px 0 4px;color:var(--muted);font-size:13px}
-		input,textarea,select{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
-		footer{margin-top:18px;color:var(--muted);font-size:13px}
-		.ok{color:#8ef0b7}
+		:root {
+			--bg: #0f1724;
+			--card: #0b1220;
+			--muted: #9aa4b2;
+			--accent: #6ee7b7;
+			--accent2: #60a5fa
+		}
+
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+			font-family: Inter, system-ui, Segoe UI, Arial;
+			background: linear-gradient(180deg, #071025 0%, #061227 100%);
+			color: #e6eef6
+		}
+
+		.container {
+			max-width: 980px;
+			margin: 32px auto;
+			padding: 28px;
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+			border-radius: 12px;
+			box-shadow: 0 10px 30px rgba(2, 6, 23, .6)
+		}
+
+		h1 {
+			margin: 0 0 6px;
+			font-size: 28px
+		}
+
+		p.lead {
+			color: var(--muted);
+			margin-top: 0
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: 1fr 340px;
+			gap: 20px;
+			margin-top: 20px
+		}
+
+		.card {
+			background: var(--card);
+			padding: 18px;
+			border-radius: 10px;
+			border: 1px solid rgba(255, 255, 255, 0.02)
+		}
+
+		pre {
+			background: #071427;
+			padding: 12px;
+			border-radius: 8px;
+			overflow: auto;
+			color: #d6f4ea
+		}
+
+		code {
+			font-family: Consolas, monaco, monospace
+		}
+
+		.endpoint {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			margin-bottom: 10px
+		}
+
+		.method {
+			font-weight: 700;
+			padding: 6px 10px;
+			border-radius: 6px;
+			background: rgba(255, 255, 255, 0.04)
+		}
+
+		.method.get {
+			color: var(--accent2)
+		}
+
+		.method.post {
+			color: var(--accent)
+		}
+
+		.try {
+			margin-top: 12px
+		}
+
+		.btn {
+			display: inline-block;
+			padding: 8px 12px;
+			border-radius: 8px;
+			background: linear-gradient(90deg, #1f2937, #0f1724);
+			color: #e6eef6;
+			text-decoration: none;
+			border: 1px solid rgba(255, 255, 255, 0.03);
+			cursor: pointer
+		}
+
+		label {
+			display: block;
+			margin: 8px 0 4px;
+			color: var(--muted);
+			font-size: 13px
+		}
+
+		input,
+		textarea,
+		select {
+			width: 100%;
+			padding: 8px;
+			border-radius: 8px;
+			border: 1px solid rgba(255, 255, 255, 0.04);
+			background: transparent;
+			color: inherit
+		}
+
+		footer {
+			margin-top: 18px;
+			color: var(--muted);
+			font-size: 13px
+		}
+
+		.ok {
+			color: #8ef0b7
+		}
 	</style>
 </head>
+
 <body>
 	<div class="container">
 		<h1>API Veterinaria</h1>
-		<p class="lead">Documentación interactiva y ejemplos para la API de mascotas. Basada en <code>main.py</code> — endpoints disponibles: listar, obtener y crear mascotas.</p>
+		<p class="lead">Documentación interactiva y ejemplos para la API de mascotas. Basada en <code>main.py</code> —
+			endpoints disponibles: listar, obtener y crear mascotas.</p>
 
 		<div class="grid">
 			<div>
@@ -38,7 +149,11 @@
 					<ul>
 						<li><strong>GET /mascotas/</strong> — lista todas las mascotas (200)</li>
 						<li><strong>GET /mascotas/{id}</strong> — obtiene una mascota por id (200 / 404)</li>
-						<li><strong>POST /mascotas/</strong> — crea una mascota y devuelve el objeto con su id (201)</li>
+						<li><strong>POST /mascotas/</strong> — crea una mascota y devuelve el objeto con su id (201)
+						</li>
+						<li><strong>PUT /mascotas/{id}</strong> — reemplaza la mascota por completo (200 / 404)</li>
+						<li><strong>PATCH /mascotas/{id}</strong> — actualiza campos parciales (200 / 404)</li>
+						<li><strong>DELETE /mascotas/{id}</strong> — elimina una mascota (204 / 404)</li>
 					</ul>
 
 					<h4>Esquema (JSON)</h4>
@@ -69,7 +184,8 @@
 					<p class="lead">Local (sin Docker):</p>
 					<pre><code>set DATABASE_URL=postgresql://alumno:alumno123@localhost:5432/veterinaria; uvicorn main:app --reload</code></pre>
 
-					<p class="lead">Nota: la variable de entorno <code>DATABASE_URL</code> controla la conexión. En Docker debe apuntar al servicio <code>db</code>.</p>
+					<p class="lead">Nota: la variable de entorno <code>DATABASE_URL</code> controla la conexión. En
+						Docker debe apuntar al servicio <code>db</code>.</p>
 				</div>
 			</div>
 
@@ -96,12 +212,40 @@
 						<div style="margin-top:8px"><button id="postBtn" class="btn">POST /mascotas/</button></div>
 					</div>
 
-					<div class="try" style="margin-top:14px">
-						<label>Resultado</label>
-						<pre id="result" style="height:200px;overflow:auto;background:#061827;padding:10px;border-radius:8px"></pre>
+					<div style="margin-top:12px">
+						<label>Reemplazar mascota (PUT)</label>
+						<input id="putId" placeholder="ID (Ej: 1)" type="number" />
+						<input id="putNombre" placeholder="Nombre" />
+						<input id="putEspecie" placeholder="Especie" />
+						<input id="putEdad" placeholder="Edad" type="number" />
+						<div style="margin-top:8px"><button id="putBtn" class="btn">PUT /mascotas/{id}</button></div>
 					</div>
 
-					<footer>Si obtienes errores CORS al usar los botones, abre esta página desde el mismo host donde corre la API o añade CORS a <code>main.py</code>.</footer>
+					<div style="margin-top:12px">
+						<label>Actualizar parcialmente (PATCH)</label>
+						<input id="patchId" placeholder="ID (Ej: 1)" type="number" />
+						<input id="patchNombre" placeholder="Nombre (opcional)" />
+						<input id="patchEspecie" placeholder="Especie (opcional)" />
+						<input id="patchEdad" placeholder="Edad (opcional)" type="number" />
+						<div style="margin-top:8px"><button id="patchBtn" class="btn">PATCH /mascotas/{id}</button>
+						</div>
+					</div>
+
+					<div style="margin-top:12px">
+						<label>Eliminar mascota (DELETE)</label>
+						<input id="deleteId" placeholder="ID (Ej: 1)" type="number" />
+						<div style="margin-top:8px"><button id="deleteBtn" class="btn">DELETE /mascotas/{id}</button>
+						</div>
+					</div>
+
+					<div class="try" style="margin-top:14px">
+						<label>Resultado</label>
+						<pre id="result"
+							style="height:200px;overflow:auto;background:#061827;padding:10px;border-radius:8px"></pre>
+					</div>
+
+					<footer>Si obtienes errores CORS al usar los botones, abre esta página desde el mismo host donde
+						corre la API o añade CORS a <code>main.py</code>.</footer>
 				</div>
 			</div>
 		</div>
@@ -120,7 +264,8 @@ print(resp.json())</code></pre>
 
 			<h4>Consejos</h4>
 			<ul>
-				<li>Asegúrate de que el servicio <code>db</code> esté listo antes de que la API intente crear tablas. El proyecto ya incluye reintentos en <code>main.py</code>.</li>
+				<li>Asegúrate de que el servicio <code>db</code> esté listo antes de que la API intente crear tablas. El
+					proyecto ya incluye reintentos en <code>main.py</code>.</li>
 				<li>Para desarrollo local puedes usar el archivo <code>init.sql</code> para poblar datos.</li>
 			</ul>
 		</section>
@@ -128,29 +273,71 @@ print(resp.json())</code></pre>
 	</div>
 
 	<script>
-		const base = 'http://pruebas.jrtdev.cl';
+		// use the current origin so the interactive page works when served by the API
+		const base = window.location.origin;
 		const result = document.getElementById('result');
-		function show(x){ result.textContent = JSON.stringify(x, null, 2); }
+		function show(x) { result.textContent = JSON.stringify(x, null, 2); }
 
-		document.getElementById('listBtn').onclick = async ()=>{
-			try{
+		document.getElementById('listBtn').onclick = async () => {
+			try {
 				const r = await fetch(base + '/mascotas/');
-				const j = await r.json(); show({status: r.status, body: j});
-			}catch(e){ show({error: e.toString()}); }
+				const j = await r.json(); show({ status: r.status, body: j });
+			} catch (e) { show({ error: e.toString() }); }
 		}
-		document.getElementById('getBtn').onclick = async ()=>{
-			const id = document.getElementById('getId').value.trim(); if(!id){ show('Introduce un id'); return }
-			try{ const r = await fetch(base + '/mascotas/' + id); const j = await r.json(); show({status: r.status, body: j}); }catch(e){ show({error: e.toString()}); }
+		document.getElementById('getBtn').onclick = async () => {
+			const id = document.getElementById('getId').value.trim(); if (!id) { show('Introduce un id'); return }
+			try { const r = await fetch(base + '/mascotas/' + id); const j = await r.json(); show({ status: r.status, body: j }); } catch (e) { show({ error: e.toString() }); }
 		}
-		document.getElementById('postBtn').onclick = async ()=>{
+		document.getElementById('postBtn').onclick = async () => {
 			const nombre = document.getElementById('nombre').value;
 			const especie = document.getElementById('especie').value;
-			const edad = parseInt(document.getElementById('edad').value||0);
-			try{
-				const r = await fetch(base + '/mascotas/', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({nombre, especie, edad})});
-				const j = await r.json(); show({status: r.status, body: j});
-			}catch(e){ show({error: e.toString()}); }
+			const edad = parseInt(document.getElementById('edad').value || 0);
+			try {
+				const r = await fetch(base + '/mascotas/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nombre, especie, edad }) });
+				const j = await r.json(); show({ status: r.status, body: j });
+			} catch (e) { show({ error: e.toString() }); }
+		};
+		// PUT (replace)
+		document.getElementById('putBtn').onclick = async () => {
+			const id = document.getElementById('putId').value.trim(); if (!id) { show('Introduce un id para PUT'); return }
+			const nombre = document.getElementById('putNombre').value;
+			const especie = document.getElementById('putEspecie').value;
+			const edad = parseInt(document.getElementById('putEdad').value || 0);
+			try {
+				const r = await fetch(`${base}/mascotas/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: parseInt(id), nombre, especie, edad }) });
+				const j = r.status !== 204 ? await r.json().catch(() => null) : null;
+				show({ status: r.status, body: j });
+			} catch (e) { show({ error: e.toString() }); }
+		}
+
+		// PATCH (partial)
+		document.getElementById('patchBtn').onclick = async () => {
+			const id = document.getElementById('patchId').value.trim(); if (!id) { show('Introduce un id para PATCH'); return }
+			const payload = {};
+			const nombre = document.getElementById('patchNombre').value;
+			const especie = document.getElementById('patchEspecie').value;
+			const edadVal = document.getElementById('patchEdad').value;
+			if (nombre) payload.nombre = nombre;
+			if (especie) payload.especie = especie;
+			if (edadVal) payload.edad = parseInt(edadVal);
+			if (Object.keys(payload).length === 0) { show('No se proporcionaron campos para PATCH'); return }
+			try {
+				const r = await fetch(`${base}/mascotas/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+				const j = await r.json(); show({ status: r.status, body: j });
+			} catch (e) { show({ error: e.toString() }); }
+		}
+
+		// DELETE
+		document.getElementById('deleteBtn').onclick = async () => {
+			const id = document.getElementById('deleteId').value.trim(); if (!id) { show('Introduce un id para DELETE'); return }
+			try {
+				const r = await fetch(`${base}/mascotas/${id}`, { method: 'DELETE' });
+				let body = null;
+				try { body = await r.json(); } catch (_) { }
+				show({ status: r.status, body });
+			} catch (e) { show({ error: e.toString() }); }
 		}
 	</script>
 </body>
+
 </html>
